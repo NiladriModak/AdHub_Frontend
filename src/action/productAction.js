@@ -6,13 +6,13 @@ export const getProduct=(keyword="",currentPage=1)=>async(dispatch)=>{
     
     try{
         dispatch({type: ALL_PRODUCT_REQUEST});
-        let link=`https://ad-backend-new.onrender.com/products`
+        let link=`https://ad-backend-1dvu.onrender.com/products`
         // console.log("curent",keyword)
         let key="";
         if('keyword' in keyword){
             key=keyword.keyword;
         }
-        link=`https://ad-backend-new.onrender.com/products?keyword=${key}&page=${currentPage}`
+        link=`https://ad-backend-1dvu.onrender.com/products?keyword=${key}&page=${currentPage}`
         const {data} = await axios.get(link);
         console.log(data)
         dispatch({type:ALL_PRODUCT_SUCCESS,payload:data});
@@ -26,7 +26,7 @@ export const getAdminProduct=(keyword="",currentPage=1)=>async(dispatch)=>{
     
     try{
         dispatch({type: ADMIN_PRODUCT_REQUEST});
-        const {data} = await axios.get("https://ad-backend-new.onrender.com/admin/products");
+        const {data} = await axios.get("https://ad-backend-1dvu.onrender.com/admin/products");
         // console.log(data)
         dispatch({type:ADMIN_PRODUCT_SUCCESS,payload:data});
     }catch(error){
@@ -42,7 +42,7 @@ export const clearError=()=>async(dispatch)=>{
 export const getProductDetails=(id)=>async(dispatch)=>{
     try {
         dispatch({type:PRODUCT_DETAILS_REQUEST});
-        const {data} = await axios.get(`https://ad-backend-new.onrender.com/products/${id}`)
+        const {data} = await axios.get(`https://ad-backend-1dvu.onrender.com/products/${id}`)
         dispatch({type:PRODUCT_DETAILS_SUCCESS,payload:data.product})
     } catch (error) {
         dispatch({type:ALL_PRODUCT_FAIL,payload:error.response.data.message,})
@@ -56,7 +56,7 @@ export const newReview=(reviewData)=>async (dispatch)=>{
         const config={
             header:{"Content-Type":"application/json"}
         }
-        const {data} = await axios.put('https://ad-backend-new.onrender.com/review',reviewData,config);
+        const {data} = await axios.put('https://ad-backend-1dvu.onrender.com/review',reviewData,config);
         dispatch({type:NEW_REVIEW_SUCCESS,payload:data.success})
     }catch(error){
         dispatch({type:NEW_REVIEW_FAIL,
@@ -75,7 +75,7 @@ export const createProduct=(productData)=>async (dispatch)=>{
         for (var pair of productData.entries()) {
             console.log(pair[0]+ ', ' + pair[1]); 
         }
-        const {data} = await axios.post('https://ad-backend-new.onrender.com/admin/products/new',productData,config);
+        const {data} = await axios.post('https://ad-backend-1dvu.onrender.com/admin/products/new',productData,config);
         dispatch({type:NEW_PRODUCT_SUCCESS,payload:data})
     }catch(error){
         dispatch({type:NEW_PRODUCT_FAIL,
@@ -87,7 +87,7 @@ export const deleteProduct=(id)=>async (dispatch)=>{
 
     try{
         dispatch({type:DELETE_PRODUCT_REQUEST});
-        const {data} = await axios.delete(`https://ad-backend-new.onrender.com/admin/products/${id}`);
+        const {data} = await axios.delete(`https://ad-backend-1dvu.onrender.com/admin/products/${id}`);
         dispatch({type:DELETE_PRODUCT_SUCCESS,payload:data.success})
     }catch(error){
         dispatch({type:DELETE_PRODUCT_FAIL,
